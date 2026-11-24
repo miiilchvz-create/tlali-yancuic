@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tlali Yancuic | Abono Orgánico Tipo Bocashi</title>
+  <style>
+    /* ==========================================================================
+       PALETA OFICIAL DE MARCA (Extraída del PDF - Diapositiva 12)
+       - Café: Tierra y tradición (#5C3A21 / #3E2614)
+       - Verde: Naturaleza y vida (#2E6F40 / #1F4E2C)
+       - Azul Turquesa: Agua y equilibrio ambiental (#1B7F8E)
+       - Beige / Crema: Naturalidad y pureza (#F7F3EA / #EFE7D6)
+       ========================================================================== */
+    :root {
+      --cafe: #5C3A21;
+      --cafe-oscuro: #3A2312;
+      --verde: #2E6F40;
+      --verde-oscuro: #1E4D2B;
+      --verde-suave: #E4EFE6;
+      --turquesa: #1B7F8E;
+      --turquesa-suave: #E2F2F4;
+      --crema: #F7F3EA;
+      --crema-tarjeta: #FFFFFF;
+      --crema-borde: #DFD5C3;
+      --texto: #2B241D;
+      --texto-secundario: #5E5347;
+      --sombra: 0 10px 28px rgba(58, 35, 18, 0.08);
+      --radio: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--crema);
+      color: var(--texto);
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       BARRA DE NAVEGACIÓN SUPERIOR Y BUSCADOR FUNCIONAL
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(247, 243, 234, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--crema-borde);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--cafe-oscuro);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--verde) 50%, var(--turquesa) 50%);
+      display: inline-block;
+      border: 2px solid var(--cafe);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.15rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--texto);
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--verde);
+    }
+
+    /* Barra de búsqueda */
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1.5px solid var(--crema-borde);
+      border-radius: 999px;
+      padding: 0.3rem 0.5rem 0.3rem 0.9rem;
+      gap: 0.4rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--turquesa);
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 0.88rem;
+      color: var(--texto);
+      width: 185px;
+    }
+
+    .search-box button {
+      border: none;
+      background-color: var(--verde);
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.38rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .search-box button:hover {
+      background-color: var(--verde-oscuro);
+    }
+
+    .search-clear {
+      background-color: transparent !important;
+      color: var(--texto-secundario) !important;
+      padding: 0.2rem 0.45rem !important;
+      font-size: 0.9rem !important;
+      display: none;
+    }
+
+    #search-status {
+      background-color: var(--turquesa-suave);
+      color: var(--cafe-oscuro);
+      border-bottom: 1px solid #BDDCE0;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.9rem;
+      display: none;
+      text-align: center;
+    }
+
+    .search-nav-btns {
+      display: inline-flex;
+      gap: 0.4rem;
+      margin-left: 0.75rem;
+    }
+
+    .search-nav-btns button {
+      background: var(--turquesa);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.18rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    mark.highlight {
+      background-color: #FFE082;
+      color: #1F1912;
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    mark.highlight.active-match {
+      background-color: var(--turquesa);
+      color: #FFFFFF;
+    }
+
+    /* ==========================================================================
+       CONTENEDORES Y TIPOGRAFÍA GENERAL
+       ========================================================================== */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      padding: 4.25rem 0;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--turquesa);
+      background-color: var(--turquesa-suave);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      color: var(--cafe-oscuro);
+      line-height: 1.22;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-lead {
+      color: var(--texto-secundario);
+      max-width: 720px;
+      font-size: 1.04rem;
+      margin-bottom: 2.25rem;
+    }
+
+    /* ==========================================================================
+       HERO / PRESENTACIÓN PRINCIPAL
+       ========================================================================== */
+    .hero {
+      padding: 4.5rem 0 4rem;
+      background: radial-gradient(circle at top right, #E6EFE4 0%, var(--crema) 58%);
+      border-bottom: 1px solid var(--crema-borde);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 2.75rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--verde-suave);
+      color: var(--verde-oscuro);
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 4.5vw, 3.3rem);
+      color: var(--cafe-oscuro);
+      line-height: 1.12;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-slogan {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--verde);
+      font-style: italic;
+      margin-bottom: 1.15rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--texto-secundario);
+      margin-bottom: 1.75rem;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: var(--verde);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--verde-oscuro);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: #FFFFFF;
+      color: var(--cafe-oscuro);
+      border: 1.5px solid var(--crema-borde);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.85rem 1.4rem;
+      border-radius: 10px;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--cafe);
+      background-color: #FAF7F2;
+    }
+
+    .hero-specs {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--crema-borde);
+    }
+
+    .spec-item strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--cafe-oscuro);
+    }
+
+    .spec-item span {
+      font-size: 0.85rem;
+      color: var(--texto-secundario);
+    }
+
+    /* Marco preparado para la imagen real del producto */
+    .product-media-card {
+      background: var(--crema-tarjeta);
+      border: 1px solid var(--crema-borde);
+      border-radius: 22px;
+      padding: 1.75rem;
+      box-shadow: var(--sombra);
+      text-align: center;
+    }
+
+    .product-image-slot {
+      width: 100%;
+      min-height: 250px;
+      border: 2px dashed var(--crema-borde);
+      border-radius: 14px;
+      background-color: #FAF7F2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .product-image-slot img {
+      max-width: 100%;
+      max-height: 300px;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .product-image-placeholder {
+      color: var(--texto-secundario);
+      font-size: 0.92rem;
+    }
+
+    .product-image-placeholder strong {
+      display: block;
+      color: var(--cafe-oscuro);
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .product-caption {
+      font-size: 0.88rem;
+      color: var(--texto-secundario);
+    }
+
+    /* ==========================================================================
+       TARJETAS Y CUADRÍCULAS
+       ========================================================================== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--crema-tarjeta);
+      border: 1px solid var(--crema-borde);
+      border-radius: var(--radio);
+      padding: 1.65rem;
+      box-shadow: var(--sombra);
+    }
+
+    .card h3 {
+      color: var(--cafe-oscuro);
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p, .card li {
+      color: var(--texto-secundario);
+      font-size: 0.96rem;
+    }
+
+    /* ==========================================================================
+       PROBLEMA Y SOLUCIÓN
+       ========================================================================== */
+    .problem-card {
+      border-top: 4px solid var(--cafe);
+    }
+
+    .solution-card {
+      border-top: 4px solid var(--verde);
+    }
+
+    .stat-highlight {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--cafe);
+      margin: 0.4rem 0;
+    }
+
+    .solution-card .stat-highlight {
+      color: var(--verde);
+    }
+
+    /* ==========================================================================
+       TABLA DE COMPOSICIÓN Y COSTOS
+       ========================================================================== */
+    .alt-bg {
+      background-color: #EFE8DA;
+      border-top: 1px solid var(--crema-borde);
+      border-bottom: 1px solid var(--crema-borde);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      background: #FFFFFF;
+      border-radius: var(--radio);
+      border: 1px solid var(--crema-borde);
+      box-shadow: var(--sombra);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background-color: var(--cafe-oscuro);
+      color: #FFFFFF;
+      padding: 0.95rem 1.15rem;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 0.85rem 1.15rem;
+      border-bottom: 1px solid #EDE6D8;
+      color: var(--texto);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr.total-row td {
+      background-color: var(--verde-suave);
+      font-weight: 700;
+      color: var(--cafe-oscuro);
+    }
+
+    /* ==========================================================================
+       IDENTIDAD DE MARCA (COLORES DEL PDF)
+       ========================================================================== */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.15rem;
+      margin-top: 1.5rem;
+    }
+
+    .color-item {
+      background: #FFFFFF;
+      border: 1px solid var(--crema-borde);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    .color-swatch {
+      height: 68px;
+      width: 100%;
+    }
+
+    .color-info {
+      padding: 1rem;
+    }
+
+    .color-info h4 {
+      font-size: 0.98rem;
+      color: var(--cafe-oscuro);
+      margin-bottom: 0.35rem;
+    }
+
+    .color-info p {
+      font-size: 0.86rem;
+      color: var(--texto-secundario);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       CANALES Y PRÓXIMA VENTA
+       ========================================================================== */
+    .channel-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .channel-chip {
+      background-color: #FFFFFF;
+      border: 1px solid var(--crema-borde);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--cafe-oscuro);
+    }
+
+    .upcoming-banner {
+      background: linear-gradient(135deg, var(--verde-suave) 0%, var(--turquesa-suave) 100%);
+      border: 1.5px solid #B7D8C0;
+      border-radius: 18px;
+      padding: 2.25rem 2rem;
+      text-align: center;
+      box-shadow: var(--sombra);
+    }
+
+    .upcoming-banner h2 {
+      color: var(--verde-oscuro);
+      margin-bottom: 0.65rem;
+    }
+
+    .upcoming-banner p {
+      color: var(--texto);
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer {
+      background-color: var(--cafe-oscuro);
+      color: #EFE7D6;
+      padding: 3rem 1.25rem 2rem;
+    }
+
+    .footer-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(239, 231, 214, 0.2);
+    }
+
+    footer h3, footer h4 {
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+    }
+
+    footer p, footer li {
+      font-size: 0.9rem;
+      color: #D7CBB8;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 0.45rem;
+    }
+
+    footer a {
+      color: #8CD3DE;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 1.5rem auto 0;
+      font-size: 0.84rem;
+      color: #B8AA96;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* ==========================================================================
+       RESPONSIVIDAD (Tabletas y celulares)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .color-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid-2,
+      .color-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        gap: 0.75rem;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .search-box input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <header>
+    <div class="nav-container">
+      <a href="#inicio" class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Tlali Yancuic</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul>
+          <li><a href="#producto">Producto</a></li>
+          <li><a href="#problema-solucion">Propósito</a></li>
+          <li><a href="#materiales">Composición</a></li>
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#mercado">Mercado</a></li>
+          <li><a href="#proxima-venta">Próxima venta</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-box" id="search-form" role="search">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Buscar en la página..."
+          aria-label="Buscar contenido en la página"
+        />
+        <button type="button" class="search-clear" id="clear-btn" title="Limpiar búsqueda">✕</button>
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+
+    <div id="search-status" aria-live="polite">
+      <span id="search-count"></span>
+      <div class="search-nav-btns" id="search-nav-btns">
+        <button type="button" id="prev-match">↑ Anterior</button>
+        <button type="button" id="next-match">↓ Siguiente</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="searchable-content">
+
+    <!-- 1. PRESENTACIÓN PRINCIPAL DEL PRODUCTO -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="hero-badge">Abono Orgánico Tipo Bocashi • Huichapan, Hidalgo</span>
+          <h1>Tlali Yancuic</h1>
+          <p class="hero-slogan">"Renovamos la tierra, cultivamos el futuro."</p>
+          <p>
+            Abono orgánico sustentable elaborado mediante el aprovechamiento de residuos orgánicos
+            y polvo de cantera de la región del Valle del Mezquital, diseñado para restaurar la
+            fertilidad de los suelos agrícolas y reducir la dependencia de fertilizantes químicos.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#materiales" class="btn-primary">Ver composición y costo</a>
+            <a href="#proxima-venta" class="btn-secondary">Próximamente a la venta</a>
+          </div>
+
+          <div class="hero-specs">
+            <div class="spec-item">
+              <strong>5 kg</strong>
+              <span>Presentación del prototipo</span>
+            </div>
+            <div class="spec-item">
+              <strong>$203.00 MXN</strong>
+              <span>Precio por unidad</span>
+            </div>
+            <div class="spec-item">
+              <strong>100% Libre de químicos</strong>
+              <span>Fórmula tipo Bocashi</span>
+            </div>
+          </div>
+        </div>
+
+        <!--.-->
+        <aside class="product-media-card" aria-label="Imagen del producto Tlali Yancuic">
+          <div class="product-image-slot" id="product-image-slot">
+            <!-- Coloca tu imagen en la misma carpeta que index.html (por ejemplo: foto-producto.jpg) y descomenta la línea <img> de abajo -->
+            <!-- <img src="foto-producto.jpg" alt="Prototipo del abono orgánico Tlali Yancuic con su etiqueta" /> -->
+            <div class="product-image-placeholder">
+              <strong>....</strong>
+              <span>... <code>&lt;img src="..."&gt;</code>.</span>
+            </div>
+          </div>
+          <p class="product-caption">
+            <strong>Tlali Yancuic:</strong> Abono orgánico tipo Bocashi con residuos orgánicos y polvo de cantera.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 2. INFORMACIÓN GENERAL Y CARACTERÍSTICAS PRINCIPALES -->
+    <section id="producto">
+      <div class="container">
+        <span class="section-tag">Información General</span>
+        <h2>Un abono orgánico adaptado al campo de Huichapan</h2>
+        <p class="section-lead">
+          Tlali Yancuic nace con la filosofía de devolverle a la tierra lo que nació de ella,
+          integrando una fórmula y proceso propio de Bocashi adaptado a las condiciones agrícolas
+          locales del Valle del Mezquital, Hidalgo.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>Fórmula tipo Bocashi</h3>
+            <p>
+              Abono orgánico producido mediante descomposición controlada de materias primas locales,
+              diseñado para aportar materia orgánica activa y nutrientes esenciales sin químicos sintéticos.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Enriquecido con polvo de cantera</h3>
+            <p>
+              Incorpora residuos minerales provenientes del corte y laminado de piedra cantera en
+              Huichapan, reintegrando minerales clave directamente a las parcelas agrícolas.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Aplicación práctica y flexible</h3>
+            <p>
+              Presentación comercial de <strong>5 kg</strong> con un costo de
+              <strong>$203.00 MXN</strong>, lista para aplicarse a los cultivos de la manera en que
+              al cliente le parezca más conveniente.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROPÓSITO: PROBLEMA Y SOLUCIÓN -->
+    <section id="problema-solucion" class="alt-bg">
+      <div class="container">
+        <span class="section-tag">Propósito e Impacto Ambiental</span>
+        <h2>El problema que buscamos resolver</h2>
+        <p class="section-lead">
+          Nuestro proyecto atiende simultáneamente dos problemáticas ambientales y productivas
+          documentadas en el municipio de Huichapan y la región del Valle del Mezquital.
+        </p>
+
+        <div class="grid-2">
+          <article class="card problem-card">
+            <h3>1. Contaminación por residuos de cantera</h3>
+            <div class="stat-highlight">~933 toneladas / año</div>
+            <p>
+              En el municipio de Huichapan se estima una generación aproximada de 933 toneladas de
+              residuos de cantera al año provenientes principalmente de las empresas dedicadas al
+              corte y laminado de piedra cantera, incluyendo pedacería y materiales derivados de los
+              procesos de corte y acabado.
+            </p>
+          </article>
+
+          <article class="card problem-card">
+            <h3>2. Degradación del suelo y fertilizantes químicos</h3>
+            <div class="stat-highlight">Pérdida de fertilidad</div>
+            <p>
+              La contaminación del suelo por uso de fertilizantes químicos así como la degradación
+              de los suelos ha ido aumentando; esta degradación, caracterizada por la pérdida de
+              nutrientes esenciales, la erosión y la disminución de la biodiversidad, plantea una
+              seria amenaza para el aseguramiento de los alimentos.
+            </p>
+          </article>
+        </div>
+
+        <div class="card solution-card" style="margin-top: 1.5rem;">
+          <h3>Nuestra Solución</h3>
+          <p>
+            Reutilizamos los residuos orgánicos y ricos en minerales generados en la región del
+            Valle del Mezquital para la restauración de suelos, además de beneficiar a la población
+            agrícola, pues el uso de este abono reduce la necesidad de fertilizantes químicos y por
+            ende disminuye la contaminación ambiental, así como los costos de producción para los
+            agricultores.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MATERIALES, COMPOSICIÓN Y COSTOS DE PRODUCCIÓN -->
+    <section id="materiales">
+      <div class="container">
+        <span class="section-tag">Materiales y Composición</span>
+        <h2>Materias primas por unidad (Presentación 5 kg)</h2>
+        <p class="section-lead">
+          Cada unidad de Tlali Yancuic combina materias primas y residuos orgánicos disponibles
+          localmente para elaborar el abono orgánico tipo Bocashi.
+        </p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Materia Prima</th>
+                <th>Cantidad por Unidad</th>
+                <th>Costo Unitario</th>
+                <th>Costo Total (MXN)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Estiércol</strong></td>
+                <td>1.47 kg</td>
+                <td>$35.00</td>
+                <td>$51.45</td>
+              </tr>
+              <tr>
+                <td><strong>Melaza</strong></td>
+                <td>4.63 ml</td>
+                <td>$9.00</td>
+                <td>$41.67</td>
+              </tr>
+              <tr>
+                <td><strong>Polvo de cantera</strong></td>
+                <td>0.735 g</td>
+                <td>$20.00</td>
+                <td>$14.70</td>
+              </tr>
+              <tr>
+                <td><strong>Rastrojo molido</strong></td>
+                <td>1.47 kg</td>
+                <td>$7.00</td>
+                <td>$10.29</td>
+              </tr>
+              <tr>
+                <td><strong>Carbón</strong></td>
+                <td>0.294 g</td>
+                <td>$35.00</td>
+                <td>$10.29</td>
+              </tr>
+              <tr>
+                <td><strong>Salvado de arroz</strong></td>
+                <td>0.735 g</td>
+                <td>$6.50</td>
+                <td>$4.78</td>
+              </tr>
+              <tr>
+                <td><strong>Levadura</strong></td>
+                <td>0.111 g</td>
+                <td>$20.00</td>
+                <td>$2.22</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="3">Costo Variable Unitario Total (5 kg)</td>
+                <td>$135.40 MXN</td>
+              </tr>
+              <tr class="total-row">
+                <td colspan="3">Precio Unitario (Margen de contribución: $67.70 MXN)</td>
+                <td>$203.00 – $203.10 MXN</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BENEFICIOS E IDENTIDAD VISUAL DE LA MARCA -->
+    <section id="beneficios" class="alt-bg">
+      <div class="container">
+        <span class="section-tag">Beneficios e Identidad</span>
+        <h2>Beneficios, utilidad e importancia de Tlali Yancuic</h2>
+        <p class="section-lead">
+          El abono orgánico mejora el suelo, aporta materia orgánica y aprovecha residuos de
+          cantera, destacando frente a fertilizantes químicos por no utilizar químicos en sus
+          ingredientes.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>Fertilidad y estructura del suelo</h3>
+            <p>
+              Mejora la fertilidad y estructura del suelo, aporta materia orgánica y contribuye a
+              recuperar la fertilidad de la tierra para favorecer el crecimiento de los cultivos.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Menor uso de químicos y costos</h3>
+            <p>
+              Reduce la necesidad de fertilizantes químicos, disminuyendo la contaminación ambiental
+              y los costos de producción para los agricultores.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Aprovechamiento regional</h3>
+            <p>
+              Reutiliza residuos orgánicos y ricos en minerales generados en el Valle del Mezquital
+              y polvo de cantera de Huichapan con enfoque ambiental y producción local.
+            </p>
+          </article>
+        </div>
+
+        <!-- Significado de los colores oficiales del PDF -->
+        <h3 style="margin-top: 2.75rem; color: var(--cafe-oscuro);">Significado de nuestros colores</h3>
+        <div class="color-grid">
+          <div class="color-item">
+            <div class="color-swatch" style="background-color: #5C3A21;"></div>
+            <div class="color-info">
+              <h4>Café: Tierra y tradición</h4>
+              <p>Representa el suelo, los minerales y la materia orgánica que se aprovechan para elaborar nuestro abono y contribuir a mejorar la calidad de la tierra.</p>
+            </div>
+          </div>
+
+          <div class="color-item">
+            <div class="color-swatch" style="background-color: #1B7F8E;"></div>
+            <div class="color-info">
+              <h4>Azul turquesa: Agua y equilibrio ambiental</h4>
+              <p>Representa el agua, un recurso esencial para la agricultura, y nuestro compromiso con el uso responsable de los recursos naturales.</p>
+            </div>
+          </div>
+
+          <div class="color-item">
+            <div class="color-swatch" style="background-color: #EFE7D6; border-bottom: 1px solid #DFD5C3;"></div>
+            <div class="color-info">
+              <h4>Beige o crema: Naturalidad y pureza</h4>
+              <p>Representa los materiales naturales, la sencillez y la confianza en un producto que busca aprovechar los residuos y darles un nuevo uso.</p>
+            </div>
+          </div>
+
+          <div class="color-item">
+            <div class="color-swatch" style="background-color: #2E6F40;"></div>
+            <div class="color-info">
+              <h4>Verde: Naturaleza y vida</h4>
+              <p>Representa las plantas, los cultivos, el crecimiento y el compromiso de nuestro producto con el cuidado del medio ambiente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. MERCADO OBJETIVO Y CANALES -->
+    <section id="mercado">
+      <div class="container">
+        <span class="section-tag">Mercado y Canales</span>
+        <h2>Segmento de mercado y canales de difusión</h2>
+        <p class="section-lead">
+          Dirigido a hombres y mujeres agricultores y agrónomos de 25 a 65 años de edad en la
+          región del Valle del Mezquital, específicamente en el municipio de Huichapan, Hidalgo y
+          sus comunidades cercanas.
+        </p>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Población agrícola en Huichapan (INEGI)</h3>
+            <p>
+              Según los registros de ocupación agrícola del INEGI, alrededor del 85.6% de quienes
+              trabajan en actividades agrícolas son hombres y el 14.4% son mujeres. Aplicado al
+              volumen del sector primario en Huichapan, esto equivale a:
+            </p>
+            <ul style="margin-top: 0.75rem; padding-left: 1.2rem;">
+              <li><strong>~3,555 hombres</strong></li>
+              <li><strong>~598 mujeres</strong></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Canales de promoción y distribución</h3>
+            <p>
+              Demostraciones del producto en parcelas agrícolas, visitas a productores locales,
+              asistencia a congresos, asociaciones y asambleas ejidales, forrajeras o tiendas de
+              productos agrícolas y redes sociales:
+            </p>
+            <div class="channel-list">
+              <span class="channel-chip">Forrajeras y tiendas agrícolas</span>
+              <span class="channel-chip">Demostraciones en parcelas</span>
+              <span class="channel-chip">Asambleas ejidales</span>
+              <span class="channel-chip">WhatsApp</span>
+              <span class="channel-chip">Facebook</span>
+              <span class="channel-chip">Instagram</span>
+              <span class="channel-chip">TikTok</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. AVISO DE PRÓXIMA VENTA -->
+    <section id="proxima-venta" class="alt-bg">
+      <div class="container">
+        <div class="upcoming-banner">
+          <span class="section-tag">Disponibilidad</span>
+          <h2>¡Próximamente a la venta!</h2>
+          <p>
+            Muy pronto podrás conocer y adquirir nuestro producto. Estamos trabajando para
+            ofrecerte una alternativa innovadora y sustentable.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- APARTADO FINAL Y CONCLUSIÓN -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>Tlali Yancuic</h3>
+        <p>
+          <em>"Renovamos la tierra, cultivamos el futuro."</em><br /><br />
+          Tlali Yancuic busca restaurar la fertilidad de los suelos agrícolas y promover la
+          sostenibilidad en la agricultura local mediante la reutilización de residuos orgánicos y
+          polvo de cantera en el Valle del Mezquital.
+        </p>
+      </div>
+
+      <div>
+        <h4>Secciones de la página</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#producto">Información general</a></li>
+          <li><a href="#materiales">Composición y costos</a></li>
+          <li><a href="#beneficios">Beneficios e identidad</a></li>
+          <li><a href="#proxima-venta">¡Próximamente a la venta!</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Tlali Yancuic • Huichapan, Hidalgo</span>
+      <span>Abono Orgánico Tipo Bocashi</span>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT SENCILLO PARA EL BUSCADOR INTERNO DE LA PÁGINA -->
+  <script>
+    (function () {
+      const form = document.getElementById("search-form");
+      const input = document.getElementById("search-input");
+      const clearBtn = document.getElementById("clear-btn");
+      const statusBar = document.getElementById("search-status");
+      const countText = document.getElementById("search-count");
+      const navBtns = document.getElementById("search-nav-btns");
+      const prevBtn = document.getElementById("prev-match");
+      const nextBtn = document.getElementById("next-match");
+      const contentRoot = document.getElementById("searchable-content");
+
+      let matches = [];
+      let currentIndex = -1;
+
+      function clearHighlights() {
+        const marks = contentRoot.querySelectorAll("mark.highlight");
+        marks.forEach((mark) => {
+          const parent = mark.parentNode;
+          parent.replaceChild(document.createTextNode(mark.textContent), mark);
+          parent.normalize();
+        });
+        matches = [];
+        currentIndex = -1;
+      }
+
+      function highlightText(term) {
+        clearHighlights();
+        const trimmed = term.trim();
+        if (!trimmed) {
+          statusBar.style.display = "none";
+          clearBtn.style.display = "none";
+          return;
+        }
+
+        clearBtn.style.display = "inline-block";
+        const escaped = trimmed.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${escaped})`, "gi");
+
+        const walker = document.createTreeWalker(
+          contentRoot,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode: function (node) {
+              if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+              const tag = node.parentNode.nodeName;
+              if (tag === "SCRIPT" || tag === "STYLE" || tag === "CODE") {
+                return NodeFilter.FILTER_REJECT;
+              }
+              return regex.test(node.nodeValue)
+                ? NodeFilter.FILTER_ACCEPT
+                : NodeFilter.FILTER_REJECT;
+            }
+          }
+        );
+
+        const textNodes = [];
+        let currentNode;
+        while ((currentNode = walker.nextNode())) {
+          textNodes.push(currentNode);
+        }
+
+        textNodes.forEach((node) => {
+          const parts = node.nodeValue.split(regex);
+          const fragment = document.createDocumentFragment();
+
+          parts.forEach((part) => {
+            if (part.toLowerCase() === trimmed.toLowerCase()) {
+              const mark = document.createElement("mark");
+              mark.className = "highlight";
+              mark.textContent = part;
+              fragment.appendChild(mark);
+              matches.push(mark);
+            } else {
+              fragment.appendChild(document.createTextNode(part));
+            }
+          });
+
+          node.parentNode.replaceChild(fragment, node);
+        });
+
+        statusBar.style.display = "block";
+        if (matches.length > 0) {
+          navBtns.style.display = "inline-flex";
+          goToMatch(0);
+        } else {
+          navBtns.style.display = "none";
+          countText.textContent = `No se encontraron resultados para "${trimmed}".`;
+        }
+      }
+
+      function goToMatch(index) {
+        if (!matches.length) return;
+        matches.forEach((m) => m.classList.remove("active-match"));
+        currentIndex = (index + matches.length) % matches.length;
+        const active = matches[currentIndex];
+        active.classList.add("active-match");
+        active.scrollIntoView({ behavior: "smooth", block: "center" });
+        countText.textContent = `Resultado ${currentIndex + 1} de ${matches.length} para "${input.value.trim()}"`;
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        highlightText(input.value);
+      });
+
+      input.addEventListener("input", function () {
+        if (!input.value.trim()) {
+          clearHighlights();
+          statusBar.style.display = "none";
+          clearBtn.style.display = "none";
+        }
+      });
+
+      clearBtn.addEventListener("click", function () {
+        input.value = "";
+        clearHighlights();
+        statusBar.style.display = "none";
+        clearBtn.style.display = "none";
+        input.focus();
+      });
+
+      nextBtn.addEventListener("click", function () {
+        goToMatch(currentIndex + 1);
+      });
+
+      prevBtn.addEventListener("click", function () {
+        goToMatch(currentIndex - 1);
+      });
+    })();
+  </script>
+</body>
+</html>
